@@ -1,0 +1,122 @@
+React Setup:
+//Create a new react application with name client
+npx create-react-app client
+
+//Navigate to client folder -> cd client
+//Start the app -> npm start and it will run in localhost port 3000
+
+NodeJS Setup
+Initialise the npm -> npm init and it will create a package.json file
+
+Intall dependancies in the backend -> npm i express mongoose jsonwebtoken dotenv nodemon. In package.json we can find all of the installed dependencies.
+nodemon is helping to restart the server by just pressing ctrl + S instead of writing every time npm start
+
+Create entry point to our backend in index.js
+    Create server using express
+
+MongoDB Setup
+inside of .env file we add the database
+We have to intall .env extention -> npm i dotenv and import that .env configuration in the index.js
+
+MongoDB connection
+via mongoose we will create a connection between Nodejs and MongoDB
+_______________________________
+
+Create pages folder 
+Login.js / Register.js
+
+In order to render the pages we have to install React router -> npm install react-router-dom antd (design purpose https://ant.design/)
+We are also going to use Bootstrap for styling purposes https://getbootstrap.com/ -> we include the link into publi -> index.html
+To overwrite any component in bootstrap we have to press inspect and find the classname of this button
+https://fonts.google.com/specimen/Roboto+Condensed
+_______________________________
+Login/ Registration backend
+1. Create user model under server/models -> userModel.js
+2. import mongoose
+3. Create user Schema
+4. Create a model for the userSchema
+5. export the model
+6. write the API endpoints for the registration and login with the help if this model
+    1.Create route inside server/routes -> userRoute.js where we will have all of the API endpoints and API functionality related to the user
+    2. We need express app to extract the routers
+7. Connect the endpoints to the server js file
+8.Install bcryptjs library to script the passwords https://www.npmjs.com/package/bcrypt
+9. Navigate to client folder and go to package.json and add the proxy
+10. Install additional libraries -> npm i axios redux redux-toolkit, react-hot-toast
+11. Work on API call with axios
+https://react-hot-toast.com/
+
+Login
+The email and password would be send from the front end, the password then will be decrypt and compared with the one stored at the back-end, and the response will follow if the login was successfull or fail.
+If the login is successfull the user will be navigated to the protected routes, but before that the token have to be sent to the front end.
+After login every API call will send that token to the back end.
+If the token is valid then the response will be send.
+    1. Set up the from end from Login.js file
+    2. Go to userRoute.js file
+    Install json web token in the 
+    client side -> npm install jsonwebtoken
+    server side -> npm install jsonwebtoken express-jwt
+    Initialize the sicret key inside of .env file
+After completing the login login into the backend -> userRoute we are now going to front-end
+
+
+_______________________________
+Authorization & Protected routes
+
+When the user log into the interface we have to check if the user is authorized to that endpoint every time.
+We are going to add a middlewear to the routes where we can directly compare the values with the DB or we are directly valuing soting the values to the DB.
+    1. Create an end point which is the protected route, so we will receive the token that will be validated at the backend. If the token is valid we will send a response to the front end
+    2. Create a middlewear to validate teh token -> middleware -> authorization.js 
+        first we will validate the jwt token with the request parameter, because there we will hold the token and we will cann the next method only if the token is valid
+        In the Home.js we add a dunction to get user data by id, so we will send API request with the header: Authorization. Any time when we are calling API request except login and registration we will send these header. In the back-end every time in the widdlewere we will check the token and if the token is valid, if it is not expire only we will send the reponse of that respect to API endpoint.
+
+
+Redux setup -> reducer-> store.js / alertSlice.js // login {loading}
+Not working
+Show loading and hide loading function inside of Login and register pages
+in App2.js we need to add loader to represent whenever the API request is in processing state
+Loading is not working in App2.js (Video 15)
+
+Protected and Public routes
+components -> ProtectedRoute.js + PublicRoute.js
+Inside of App2.js we will wrap the registration and login with the public routes
+
+
+Creating Layout for cdifferent profiles
+Inside of components folder create Layout.js file where the structure will be included
+Next going to the home page we will add the Layout as the parent element, and inside the Layout it could be rengerent the content needed.
+Using remixicon for the icons -> https://remixicon.com/
+
+To get the user info into the home page we have to create a API call and then creare usersSlice reducer inside of reduser folder. Then we need to add the user to the store
+
+______________________________
+Create contractor account:
+models -> userModel 
+There we add additional properties if the isAdmin is true we will have different layout, and if isContractor is true we will have different layout as well.
+
+
+
+_______________________________
+Delete Function:
+
+1.First we are creating new route inside of routes/tasks/js
+We need to make sure we have access to _id same as with update because we need to know which task are we deleting and then we are calling a function deleteTask. Then we will import in from the controllers.
+
+2. Inside of teh controller we will create the async function that has request and response as parameters, we will get the id, then make sure it exists and then implement the logic
+
+3. Third step is to go the client side to initiate the route that we created
+
+4. Go to API and implement that API call
+
+5.Go to actions and create our action creator. Because we are not passigng any data we are going to await the api call
+
+6. After creating an action we go to reducers where we have to implement DELETE and we are going to return all the posts but we will first filer out the one which is deleted
+
+7. Go inside of our Tasks/Task/Task.js and dispatch that action
+
+____________________________________________________________________________________________________
+
+Deploy in Heroku - https://www.youtube.com/watch?v=aibtHnbeuio&list=PL6QREj8te1P7VSwhrMf3D3Xt4V6_SRkhu&index=3
+Search -> https://www.youtube.com/watch?v=LYWgPSbPDfQ&list=PL6QREj8te1P7VSwhrMf3D3Xt4V6_SRkhu&index=4
+
+https://coolors.co/gradient-maker
